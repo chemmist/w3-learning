@@ -1,0 +1,53 @@
+#mainContainer {
+    width: 80vw;
+    height: 90vh;
+    margin: auto;
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 4fr 1fr;
+    grid-template-areas:
+    "sidebar header"
+    "sidebar content"
+    "footer footer";
+}
+
+#mainContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainBox {
+    border: 1px solid darkolivegreen;
+    color: darkolivegreen;
+    font-size: 20px;
+    text-align: center;
+    padding: 11px;
+}
+
+.projectBox {
+    width: auto;
+    height: 77px;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid darkolivegreen;
+    color: darkolivegreen;
+    font-size: 20px;
+    text-align: center;
+}
+
+#mainSideBar {
+    grid-area: sidebar;
+}
+#mainHeader {
+    grid-area: header;
+}
+#mainContent {
+    grid-area: content;
+}
+#mainFooter {
+    grid-area: footer;
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>temp 1</title>
+
+    <style>
+        .box {
+            background-color: darkolivegreen;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            padding: 11px;
+            
+        }
+
+        @media(min-width:900px) {
+          .container {
+            background:rgb(88, 88, 88);
+          }
+        }
+
+        .container {
+            border: 1px solid magenta;
+            height: 90vh;
+            display: grid;
+            grid-gap: 1px;
+            grid-template-columns: repeat(2, 1fr) repeat(3, 3fr);
+            grid-template-rows: repeat(4, 1fr);
+            grid-template-areas:
+            "a a a b"
+            "c c c b"
+            "e e e b";
+
+            /*
+            flex-direction: row;
+            justify-content: center;
+            align-items: start;
+            */
+        }
+
+        #i1 {
+          grid-area: a;
+        }
+        #i2 {
+          grid-area: b;
+        }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div id="i1"   class="box">1 1 1 1</div>
+      <div id="i2"   class="box">2 2 2 2</div>
+      <div id="i3"   class="box">3 3 3 3</div>
+      <div id="i4"   class="box">4 4 4 4</div>
+      <div id="i5"   class="box">5 5 5 5</div>
+      <div id="i6"   class="box">6 6 6 6</div>
+      <div id="i7"   class="box">7 7 7 7</div>
+      <div id="i8"   class="box">8 8 8 8</div>
+    </div>
+    
+    <script>
+        function depth(element){
+            let depth = 0;
+            while(element = element.parentElement) {
+                depth++;
+            }
+            return depth;
+        }
+    </script>
+
+  </body>
+
+</html>
