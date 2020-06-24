@@ -114,3 +114,21 @@ const myPhone = new Phone();
 console.log(myPhone.hasOwnProperty('operatingSystem'));    // true
 console.log(myPhone.hasOwnProperty('screenSize'));         // false
 console.log(Phone.prototype.hasOwnProperty('screenSize')); // true
+
+/////////////////////////////////////////////////////
+const rodent = {
+    favoriteFood: 'cheese',
+    hasTail: true
+};
+function Mouse() {
+    this.favoriteFood = 'cheese';
+}
+Mouse.prototype = rodent;
+const ralph = new Mouse();
+const result = rodent.isPrototypeOf(ralph);
+console.log(result); // true
+const myPrototype = Object.getPrototypeOf(ralph);
+console.log(myPrototype);
+console.log(ralph.constructor);
+
+/////////////////////////////////////////////////////

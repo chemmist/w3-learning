@@ -1,0 +1,32 @@
+
+.projectBox {
+    width: auto;
+    height: auto;
+    padding: 3px;
+    margin: 10px;
+    border: 1px solid rgba(85, 107, 47, 0.3);
+    border-radius: 10px;
+    color: darkolivegreen;
+    font-size: 20px;
+    text-align: center;
+    opacity: 70%;
+}
+.projectBox:hover {
+    opacity: 100%;
+}
+
+img.projectImage {
+    width: 222px;
+    height: 111px;
+    overflow: hidden; /* doesn't work somehow */
+    border-radius: 10px;
+}
+
+p.projectName {
+    margin: 0;
+    /*border: 1px solid magenta;*/
+    text-align: center;
+    font-size: 1em;
+    font-weight: lighter;
+    font-family: 'Courier New';
+}

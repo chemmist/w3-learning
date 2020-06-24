@@ -1,0 +1,38 @@
+
+#mdMainContainer {
+
+    width: 60vw;
+    margin: auto;
+}
+
+#canvasPlaceholderDiv {
+    height: 60vh;
+    margin: 0 auto;
+    background-color: grey;
+    color: darkslategray;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#parameterSelectionPlaceholderDiv {
+    height: 111px;
+    margin: 1em;
+    background-color: lightgrey;
+    color: slategrey;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#mdMainFooter {
+    height: 111px;
+    position: relative;
+}
+
+#mdMainFooterText {
+    position: absolute;
+    bottom: 0;
+}

@@ -1,6 +1,7 @@
+
 #mainContainer {
+    border: 1px solid red;
     width: 80vw;
-    height: 90vh;
     margin: auto;
     display: grid;
     grid-gap: 1px;
@@ -12,33 +13,6 @@
     "footer footer";
 }
 
-#mainContent {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
-.mainBox {
-    border: 1px solid darkolivegreen;
-    color: darkolivegreen;
-    font-size: 20px;
-    text-align: center;
-    padding: 11px;
-}
-
-.projectBox {
-    width: auto;
-    height: 77px;
-    padding: 20px;
-    margin: 10px;
-    border: 1px solid darkolivegreen;
-    color: darkolivegreen;
-    font-size: 20px;
-    text-align: center;
-}
-
 #mainSideBar {
     grid-area: sidebar;
 }
@@ -47,7 +21,29 @@
 }
 #mainContent {
     grid-area: content;
+    
+    display: inline flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /* gap: 3px;  Not supported by chrome until v84 */
 }
 #mainFooter {
     grid-area: footer;
+    font-size: 1em;
+    font-weight: 100;
+    font-family: 'Courier New';
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.mainBox {
+    border: 1px solid darkolivegreen;
+    color: darkolivegreen;
+    font-size: 20px;
+    text-align: center;
+    padding: 11px;
 }
