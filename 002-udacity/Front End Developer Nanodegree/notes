@@ -1,0 +1,34 @@
+// Lesson1 HTML
+<a href="https://thelabradorclub.com" rel="noopener" target="_blank">Join The Labrador Retriever Club</a>
+// Specifying document type
+<!DOCTYPE html>
+// displaying name in tab
+<title>My Coding Journal</title>
+
+
+// linking css file
+<link href="./style.css" type="text/css" rel="stylesheet" />
+// linking css file to css file
+// at the top of your main CSS file
+@import './layout';
+@import './images';
+@import './blog-cards';
+
+
+// css display inside and outside
+    display: flex
+    flex-direction: row;
+    justify-content: center;
+    align-items: start; // center
+
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: 1fr 3fr 3fr 3fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+    "a a a b"
+    "c c c b"
+    "d d d e";
+    grid-auto-rows: minmax(100px, auto);
+    
+    grid-area: a;
