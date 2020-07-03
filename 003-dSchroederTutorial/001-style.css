@@ -1,3 +1,5 @@
+@import "001-style-settings.css";
+
 * {
     /*/
     border: 1px solid darkolivegreen;
@@ -53,51 +55,6 @@ a {
 }
 #newtonCanvas {
     position: relative;
-}
-
-/* settings */
-#settings {
-    --height: 111px;
-    border: 1px solid red;
-    height: var(--height);
-
-    display: grid;
-    grid-gap: 1px;
-    grid-template-columns: 4fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas:
-    "speedSetting startButton"
-    "hPosSetting startButton"
-    "yetAnotherSetting startButton";
-}
-
-#speedSetting {
-    grid-area: speedSetting;
-    text-align: left;
-}
-#hPositionSetting {
-    grid-area: hPosSetting;
-    text-align: left;
-}
-
-
-#startSimulation {
-    grid-area: startButton;
-    border: 1px solid darkolivegreen;
-    border-radius: 11px;
-    background-color: darkolivegreen;
-    color: whitesmoke;
-}
-#startSimulation:hover {
-    border: 2px solid olive;
-}
-#startSimulation:active {
-    border: 2px solid olive;
-    background-color: olive;
-}
-#startSimulation:focus {
-    border: 2px solid olive;
-    background-color: olive;
 }
 
 /* header footer */

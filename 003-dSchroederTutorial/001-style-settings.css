@@ -1,0 +1,53 @@
+#settings {
+    --height: 111px;
+    border: 1px solid red;
+    height: var(--height);
+
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: 2fr 1fr 2fr 1fr 1fr;
+    grid-template-rows:  1fr 1fr 1fr;
+    grid-template-areas:
+    "speedText speedInput empty empty startButton"
+    "hPosText hPosInput empty empty startButton"
+    "vPosText vPosInput empty empty startButton";
+}
+
+#speedText {
+    grid-area: speedText;
+}
+#speedInput {
+    grid-area: speedInput;
+}
+#hPosText {
+    grid-area: hPosText;
+}
+#hPosInput {
+    grid-area: hPosInput;
+}
+#vPosText {
+    grid-area: vPosText;
+}
+#vPosInput {
+    grid-area: vPosInput;
+}
+
+#startSimulation {
+    grid-area: startButton;
+    border: 1px solid darkolivegreen;
+    border-radius: 11px;
+    background-color: darkolivegreen;
+    color: whitesmoke;
+}
+#startSimulation:hover {
+    border: 2px solid olive;
+}
+#startSimulation:active {
+    border: 2px solid olive;
+    background-color: olive;
+}
+#startSimulation:focus {
+    outline: 0;
+    border: 2px solid olive;
+    background-color: olive;
+}
