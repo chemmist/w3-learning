@@ -1,0 +1,108 @@
+* {
+    /*/
+    border: 1px solid darkolivegreen;
+    /**/
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 5fr 1fr 1fr;
+    grid-gap: 11px;
+
+    /*
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    */
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size:15px;
+    width:600px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color:#c0c0c0;
+}
+
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size:24px;
+    text-align:center;
+    color: darkolivegreen;
+}
+
+a {
+    color: darkolivegreen;
+}
+
+/* simulation */
+#newtonCannon {
+    margin: 0 auto;
+    position: relative;
+}
+
+#newtonDrawing, #newtonCanvas {
+    --size: min(80vw, 80vh); 
+    width: var(--size);
+    height: var(--size);
+}
+#newtonDrawing {
+    position:absolute;
+    opacity: 50%;
+}
+#newtonCanvas {
+    position: relative;
+}
+
+/* settings */
+#settings {
+    --height: 111px;
+    border: 1px solid red;
+    height: var(--height);
+
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+    "speedSetting startButton"
+    "hPosSetting startButton"
+    "yetAnotherSetting startButton";
+}
+
+#speedSetting {
+    grid-area: speedSetting;
+    text-align: left;
+}
+#hPositionSetting {
+    grid-area: hPosSetting;
+    text-align: left;
+}
+
+
+#startSimulation {
+    grid-area: startButton;
+    border: 1px solid darkolivegreen;
+    border-radius: 11px;
+    background-color: darkolivegreen;
+    color: whitesmoke;
+}
+#startSimulation:hover {
+    border: 2px solid olive;
+}
+#startSimulation:active {
+    border: 2px solid olive;
+    background-color: olive;
+}
+#startSimulation:focus {
+    border: 2px solid olive;
+    background-color: olive;
+}
+
+/* header footer */
+#header, #footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
