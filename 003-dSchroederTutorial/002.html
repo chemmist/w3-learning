@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://physics.weber.edu/schroeder/html5/default.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=680">
+    <title>HTML5 tutorial</title>
+    <style>
+        #theCanvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body style="font-size:15px; font-family:sans-serif; line-height:130%;">
+
+<div style="width:640px; margin-left:auto; margin-right:auto; position:relative;">
+
+    <canvas id="theCanvas" width="640" height="600" style="position:fixed; z-index:-1;"></canvas>
+
+    <div style="float:right; text-align:center;">
+        <a href="javascript:void(0)" id="theButton" onclick="startStop();" ontouchstart="" style="color:#c0c0c0; background-color:rgba(0,0,0,0.03); padding:3px; 
+            display:inline-block; width:70px; font-size:12px; line-height:15px;
+            border:1px solid #e0e0e0; border-radius:5px; text-decoration:none;">
+                Pause<br>animation
+        </a>
+    </div>
+
+
+</div>
+
+<script>    // Background animation
+
+    // Global variables:
+    var theCanvas = document.getElementById("theCanvas");
+    var theContext = theCanvas.getContext("2d");
+    var N = 3;  // number of atoms
+    var x = [2, 4, 6]; y = [2, 2.1, 1.8];       // note that N=3 is hard-coded here
+    x[1] += 0.01*Math.random();     // randomize a bit so motion is always different
+    var vx = [0, 0, 0]; vy = [0, 0.7, 0];
+    var ax = new Array(N); ay = new Array(N);
+    var color = ["#ffd8c0", "#c0ffc0", "#e0d0ff"];
+    var pxPerUnit = 70;     // diameter of drawn atoms in (nominal) pixels
+    var boxWidth = theCanvas.width / pxPerUnit;     // box dimensions in natural units
+    var boxHeight = theCanvas.height / pxPerUnit;
+    var theButton = document.getElementById("theButton");
+    var running = true;
+
+    // Check for saved state from previous visit to this page:
+    var wasRunning = localStorage.getItem("running");
+    if (wasRunning != null) {
+        if (wasRunning == "false") {
+            running = false;
+            theButton.innerHTML = "Resume<br>animation";
+        }
+        var xList = localStorage.getItem("x").split(",");
+        var yList = localStorage.getItem("y").split(",");
+        var vxList = localStorage.getItem("vx").split(",");
+        var vyList = localStorage.getItem("vy").split(",");
+        for (var i=0; i<N; i++) {
+            x[i] = Number(xList[i]);    // These explicit conversions seem to be necessary
+            y[i] = Number(yList[i]);
+            vx[i] = Number(vxList[i]);
+            vy[i] = Number(vyList[i]);
+        }
+    }
+
+    window.addEventListener("beforeunload", saveState, false);
+
+    paintCanvas();
+    computeAccelerations();
+    simulate();     // start the simulation
+
+    // Function to simulate for a single animation frame and schedule next frame:
+    function simulate() {
+        for (var step=0; step<15; step++) {     // 15 time steps per frame
+            singleStep();
+        }
+        paintCanvas();
+        if (running) window.setTimeout(simulate, 1000/40);  // 40 frames per second
+    }
+
+    // Function to move forward in time by a single integration step:
+    function singleStep() {
+        var dt = 0.015;
+        for (var i=0; i<N; i++) {
+            x[i] += vx[i]*dt + 0.5*ax[i]*dt*dt;         // Verlet algorithm
+            y[i] += vy[i]*dt + 0.5*ay[i]*dt*dt;
+            vx[i] += 0.5*ax[i]*dt;
+            vy[i] += 0.5*ay[i]*dt;
+        }
+        computeAccelerations();
+        for (var i=0; i<N; i++) {
+            vx[i] += 0.5*ax[i]*dt;
+            vy[i] += 0.5*ay[i]*dt;
+        }
+    }
+
+    // Compute the accelerations of all the atoms:
+    function computeAccelerations() {
+        // First check for bounces off walls:
+        var wallStiffness = 50;
+        for (var i=0; i<N; i++) {
+            if (x[i] < 0.5) {
+                ax[i] = wallStiffness * (0.5 - x[i]);
+            } else
+                if (x[i] > (boxWidth - 0.5)) {
+                    ax[i] = wallStiffness * (boxWidth - 0.5 - x[i]);
+                } else
+                    ax[i] = 0.0;
+            if (y[i] < 0.5) {
+                ay[i] = (wallStiffness * (0.5 - y[i]));
+            } else
+                if (y[i] > (boxHeight - 0.5)) {
+                    ay[i] = (wallStiffness * (boxHeight - 0.5 - y[i]));
+                } else
+                    ay[i] = 0;
+        }
+        // Now compute inter-atomic forces (Lennard-Jones):
+        for (var i=0; i<N; i++) {
+            for (var j=0; j<i; j++) {
+                var dx = x[i] - x[j];
+                var dy = y[i] - y[j];
+                var rSquared = dx*dx + dy*dy;
+                var rSquaredInv = 1.0 / rSquared;
+                var attract = rSquaredInv * rSquaredInv * rSquaredInv;
+                var repel = attract * attract;
+                var fOverR = 24.0 * ((2.0 * repel) - attract) * rSquaredInv;
+                var fx = fOverR * dx;
+                var fy = fOverR * dy;
+                ax[i] += fx;  // add this force onto i's acceleration (m = 1)
+                ay[i] += fy;
+                ax[j] -= fx;  // Newton's 3rd law
+                ay[j] -= fy;
+            }
+        }
+    }
+
+    // Draw the atoms at their current locations:
+    function paintCanvas() {
+        theContext.clearRect(0, 0, theCanvas.width, theCanvas.height);
+        for (var i=0; i<N; i++) {
+            var centerX = x[i] * pxPerUnit;
+            var centerY = theCanvas.height - (y[i] * pxPerUnit);
+            theContext.beginPath();
+            theContext.arc(centerX, centerY, pxPerUnit/2, 0, 2*Math.PI);
+            theContext.fillStyle = color[i];
+            theContext.fill();
+        }
+    }
+
+    // Pause or resume the animation:
+    function startStop() {
+        running = !running;
+        if (running) {
+            simulate();
+            theButton.innerHTML = "Pause<br>animation";
+        } else {
+            theButton.innerHTML = "Resume<br>animation";
+        }
+    }
+
+    // Save the state before we exit:
+    function saveState() {
+        localStorage.setItem("time", (new Date()).getTime());
+        if (running) {
+            localStorage.setItem("running", "true");
+        } else {
+            localStorage.setItem("running", "false");
+        }
+        localStorage.setItem("x", x.toString());
+        localStorage.setItem("y", y.toString());
+        localStorage.setItem("vx", vx.toString());
+        localStorage.setItem("vy", vy.toString());
+    }
+
+</script>
+
+
+ 
+</body></html>

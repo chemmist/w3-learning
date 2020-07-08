@@ -97,3 +97,4 @@
         }
 
         startSimulation.onclick = onStart;
+        drawProjectile();
