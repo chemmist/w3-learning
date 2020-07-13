@@ -1,0 +1,197 @@
+
+
+
+
+# // 4
+# raw strings
+r"asdf asdf"
+# string constructor
+str()
+str.encode()
+bytes.decode()
+
+list()
+list.append()
+[1,2,3]
+
+dict()
+{a:1, b:2, c:3}
+
+
+
+
+# // 5
+# specifies interpreter to use
+#!/usr/in/env python3
+
+# _ (underscore) - last result 
+# None
+# if __name__ == '__main__'
+# sys.argv
+
+def f()
+    """ dockstring that is used in python when calling help f"""
+    print("f()")
+help(f)
+
+# comment
+
+# make script file executable 
+# chmod +x file_name
+
+
+ 
+
+# // 6
+# function argumnts are transfered by pass-by-object-reference
+# references to objects are copied not the objects themselves
+def f(a): return a;
+a is f(a) # True
+
+# always use immutable objects for default function arguments
+def append1(l = []): 
+    l.append(1);
+    print(l);
+append(1) # [1]
+append(1) # [1,1]
+
+def append1(l = None): 
+    if l == None:
+        l = [1]
+    else:
+        l.append(1)
+    print(l);
+append1() # [1]
+append1() # [1]
+append(['a','b','c']) # ['a','b','c',1]
+
+#python Scopes :
+# Local - inside current function
+# Enclosing - inside enclosing functions
+# Global -  at the top level of the module
+# Built-In - in the special builtins module
+global
+
+# all variables in Python are references to objects
+#  even basic types such as integers
+# python uses named references to objects
+# assignment attaches a name to an object
+# assigning one name to another makes them both point to the same object
+# id() return a unique integer id for an object
+# 'is' determines if two names point to same object
+# test for equivalence using ==
+#default arguments are evaluated once when he function is defined 
+
+# determine type of an object
+type()
+# atributes of an object
+dir()
+
+
+
+
+# // 7
+# tuples
+t = (1, 'a', 2.222)
+len(t)
+t[2]
+for el in t:
+    ptint(el)
+# empty and single element tuple
+(), (973,)
+t = 1,2,3,4,5.555
+def minmax(arr):
+    return min(arr), max(arr)
+(m,M) = minmax([1,2,3,4,5,6,7])
+a,b = b,a
+1 in tuple([1,2,3,4])
+
+colors = ';'.join(['#432343', '#AAffAA', '#552277'])
+colors.split(';')
+''.join(('aaa','bbb','ccc'))
+'unforgetable'.partition('forget')
+origin,_,destination = "Seatle-Boston".partition('-')
+
+'formated string {l[0]} and {l[1]}'.format(l=[1,2,3])
+l = [1,2,3]
+f'formated string {l[0]} and {l[1]}'
+
+import datetime
+f'time now is {datetime.datetime.now()}'
+# 'time now is 2020-07-07 16:00:44.924554'
+
+import math
+f'math constants pi={math.pi:.3f}, e={math.e:.3f}'
+
+
+
+
+# // 9 iteration and iterables
+[math.factorial(x) for x in range(10)]
+{math.factorial(x) for x in range(10)}
+
+country_to_capital = { "United Kingdom" : "London", "Brazil" : "Brasilia", "Morocco" : "Rabat", "Sweden" : "Stockholm" }
+capital_to_country = { capital : country for country, capital in country_to_capital.items() }
+
+[x for x in range(13) if x%2==1]
+
+iterable = ['Spring', 'Summer', 'Autumn', 'Winter']
+iterator = iter(iterable)
+next(iterator)
+
+# Generators
+def lucas():
+    yield 2
+    a = 2
+    b = 1
+    while True:
+        yield b
+        a, b = b, a + b
+
+# Generator comprehension, evaluates lazily
+g = (math.factorial(x) for x in range(10))
+next(g)
+
+def isprime(n):
+    if n < 2: return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0: return False
+    return True
+
+def primes():
+    yield 1
+    yield 2
+    p = 3
+    while True:
+        if isprime(p): yield p
+        p += 2
+
+sum(itertools.islice((x for x in itertools.count() if isprime(x)), 1000))
+any(isprime(n) for n in range(1333, 1777))
+all(isprime(n) for n in range(3, 8, 2))
+
+zip(list1, list2) -> list of tuples (el1, el2)
+itertools.chain(list1, list2, list3)
+
+
+
+
+
+
+# // 10 classes
+type()
+
+"""Model for aircraft flights."""
+class Flight:
+    pass
+
+f = Flight()
+type(f)
+
+from importlib import reload  
+import foo
+if is_changed(foo):
+    foo = reload(foo)
+
+Airtravel.py
+
